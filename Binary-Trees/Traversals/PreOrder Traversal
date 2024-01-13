@@ -1,0 +1,53 @@
+https://leetcode.com/problems/binary-tree-preorder-traversal/solutions/4555807/preorder-traversal
+
+Intuition:
+Solving by Iterative method
+
+Approach:
+1. We first take the stack data structure and push the root node to it.
+2. Iterate over the stack till it is empty.
+3. Pop stack's top and print it.
+4. Since stack is LIFO, to access left we need to first push right and then the left.
+5. Excecute till stack is empty.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(n)
+
+Code:
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> preOrder;
+        if(root == nullptr) return preOrder;
+        stack<TreeNode*> s;
+        s.push(root);
+        
+        while(!s.empty()){
+            TreeNode* topNode = s.top();
+            s.pop(); // Remove the processed node from the stack
+            preOrder.push_back(topNode -> val);
+            
+            // Push right and left children onto the stack if they exist
+            if(topNode -> right != nullptr) s.push(topNode -> right);
+            if(topNode -> left != nullptr) s.push(topNode -> left);
+        }
+        return preOrder;
+    }
+};
+
+
