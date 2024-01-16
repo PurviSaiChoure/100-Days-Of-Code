@@ -11,17 +11,18 @@
  */
 class Solution {
 public:
-    vector<int> postorderTraversal(TreeNode* root) {
-       vector<int> postOrder;
-        if (root == nullptr) return postOrder;
+    vector<int> inorderTraversal(TreeNode* root) {
+         vector<int> inOrder;
+        if (root == nullptr) return inOrder;
 
-        vector<int> leftResult = postorderTraversal(root->left);
-        vector<int> rightResult = postorderTraversal(root->right);
+        vector<int> leftResult = inorderTraversal(root->left);
+        vector<int> rightResult = inorderTraversal(root->right);
 
-        postOrder.insert(postOrder.end(), leftResult.begin(), leftResult.end());
-        postOrder.insert(postOrder.end(), rightResult.begin(), rightResult.end());
-        postOrder.push_back(root->val);
+        inOrder.insert(inOrder.end(), leftResult.begin(), leftResult.end());
+        inOrder.push_back(root->val);
+        inOrder.insert(inOrder.end(), rightResult.begin(), rightResult.end());
 
-        return postOrder; 
+        return inOrder;
+    
     }
 };
